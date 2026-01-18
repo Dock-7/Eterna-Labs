@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+  
+  body {
+    background-color: rgb(2 6 23);
+    color: rgb(241 245 249);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  main {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  }
+}
+
+/* card look aligned with Axiom */
+.card-surface {
+  background-color: rgb(15 23 42);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border-radius: 1rem;
+  border: 1px solid rgb(30 41 59);
+}
+
+.card-header {
+  background-color: rgb(15 23 42 / 0.5);
+  border-bottom: 1px solid rgb(30 41 59);
+}
+
+/* simple shimmer for skeletons */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* price flash */
+.price-flash {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.15s ease;
+  border-radius: 9999px;
+}
+
+.price-flash--up {
+  background-color: rgba(34, 197, 94, 0.15);
+}
+
+.price-flash--down {
+  background-color: rgba(248, 113, 113, 0.18);
+}

@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Axiom Trade - Token Discovery Table
+
+A pixel-perfect replica of Axiom Trade's token discovery table built with Next.js 14, TypeScript, Tailwind CSS, Redux Toolkit, and React Query.
+
+## Features
+
+- ✅ **All Token Columns**: New pairs, Final Stretch, Migrated status badges
+- ✅ **Interactive Components**: Popover (sorting), Tooltip (hover info), Modal (token details)
+- ✅ **Real-time Updates**: WebSocket mock with smooth color transitions for price changes
+- ✅ **Loading States**: Skeleton loaders with shimmer effect, progressive loading, error boundaries
+- ✅ **Sorting & Filtering**: Multi-criteria sorting and status/chain filtering
+- ✅ **Responsive Design**: Fully responsive down to 320px width
+- ✅ **Performance Optimized**: Memoized components, optimized re-renders, <100ms interactions
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS 4
+- **State Management**: Redux Toolkit
+- **Data Fetching**: React Query (TanStack Query)
+- **UI Components**: Radix UI (Dialog, Popover, Tooltip)
+- **Charts**: Recharts (Sparkline)
+- **Architecture**: Atomic Design Pattern
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js app router
+│   ├── api/               # API routes
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Main page
+│   └── providers.tsx      # Redux & React Query providers
+├── components/
+│   ├── atoms/             # Basic building blocks
+│   │   ├── Skeleton.tsx
+│   │   └── Tooltip.tsx
+│   ├── molecules/         # Composite components
+│   │   ├── FilterBar.tsx
+│   │   ├── PriceChangePill.tsx
+│   │   ├── SortPopover.tsx
+│   │   ├── Sparkline.tsx
+│   │   └── TokenBadges.tsx
+│   ├── organisms/         # Complex components
+│   │   ├── ColumnGroup.tsx
+│   │   ├── TokenDetailsDialog.tsx
+│   │   ├── TokenRow.tsx
+│   │   └── TokenTable.tsx
+│   └── layout/            # Layout components
+│       ├── BottomBar.tsx
+│       └── Topbar.tsx
+├── hooks/                  # Custom React hooks
+│   ├── useRedux.ts
+│   ├── useTokensQuery.ts
+│   └── useWsMock.ts
+├── lib/                    # Utilities & types
+│   ├── api.ts
+│   ├── types.ts
+│   └── utils.ts
+└── store/                  # Redux store
+    ├── index.ts
+    └── tokenSlice.ts
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Features Implementation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Real-time Price Updates
+- Mock WebSocket hook (`useWsMock`) simulates real-time price updates
+- Smooth color transitions (green for increases, red for decreases)
+- Price flash animations on updates
 
-## Learn More
+### Loading States
+- Skeleton loaders with shimmer animation
+- Progressive loading with React Query
+- Error boundaries for graceful error handling
 
-To learn more about Next.js, take a look at the following resources:
+### Responsive Design
+- Mobile-first approach
+- Breakpoints: 320px, 640px (sm), 768px (md), 1024px (lg)
+- Adaptive column layouts
+- Touch-friendly interactions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Performance Optimizations
+- React.memo for component memoization
+- useCallback and useMemo for expensive operations
+- Optimized Redux selectors
+- Code splitting with Next.js
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## API
 
-## Deploy on Vercel
+The application includes a mock API endpoint at `/api/tokes` that returns token data. In production, this would connect to a real API.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import the repository in Vercel
+3. Vercel will automatically detect Next.js and deploy
+
+### Environment Variables
+
+No environment variables required for the mock implementation.
+
+## Performance Metrics
+
+Target Lighthouse scores:
+- Performance: ≥90
+- Accessibility: ≥90
+- Best Practices: ≥90
+- SEO: ≥90
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## License
+
+MIT
+
+## Acknowledgments
+
+Built as a replica of [Axiom Trade](https://axiom.trade/pulse) for educational purposes.
