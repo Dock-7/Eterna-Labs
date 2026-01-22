@@ -10,7 +10,9 @@ export function useTokensQuery() {
   return useQuery<Token[]>({
     queryKey: ['tokens'],
     queryFn: fetchTokens,
-    staleTime: 30000, // 30 seconds
+    staleTime: Infinity, // Never refetch - keep data static
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   });
 }

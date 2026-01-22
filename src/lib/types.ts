@@ -49,5 +49,8 @@ export interface PriceUpdate {
   price: number;
   priceChange24h: number;
   priceChangePercent24h: number;
+  volume24h?: number;
+  marketCap?: number;
+  liquidity?: number;
   timestamp: number;
 }

@@ -12,9 +12,9 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col">
+    <div className="h-screen bg-slate-950 flex flex-col overflow-hidden">
       <Topbar />
-      <main className="flex-1 container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8 w-full max-w-[1600px]">
+      <main className="flex-1 min-h-0 overflow-hidden w-full pb-14 min-[641px]:pb-0">
         <ErrorBoundary>
           <TokenTable />
         </ErrorBoundary>

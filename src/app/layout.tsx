@@ -6,6 +6,9 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
+import { Topbar } from '@/src/components/layout/Topbar';
+import { BottomBar } from '@/src/components/layout/BottomBar';
+import { MobileBottomBar } from '@/src/components/layout/MobileBottomBar';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -14,8 +17,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Axiom Trade - Token Discovery Table',
+  title: 'Eterna Labs',
   description: 'Pixel-perfect replica of Axiom Trade token discovery table',
+  icons: {
+    icon: '/logo.png',
+  },
 };
 
 export const viewport = {
@@ -38,8 +44,21 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
       </head>
       <body className={inter.className} suppressHydrationWarning>
-        <Providers>{children}</Providers>
-      </body>
+  <Providers>
+    {/* Top Navigation */}
+
+    {/* Main Page Content */}
+    
+      <div id="elastic-root">
+        {children}
+      </div>
+
+  
+    {/* Mobile Bottom Bar ( ≤ 640px ) */}
+    <MobileBottomBar />
+    </Providers>
+</body>
+
     </html>
   );
 }

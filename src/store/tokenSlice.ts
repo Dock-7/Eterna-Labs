@@ -46,7 +46,7 @@ const tokenSlice = createSlice({
       state.selectedToken = action.payload;
     },
     updatePrice: (state, action: PayloadAction<PriceUpdate>) => {
-      const { tokenId, price, priceChange24h, priceChangePercent24h } = action.payload;
+      const { tokenId, price, priceChange24h, priceChangePercent24h, volume24h, marketCap, liquidity } = action.payload;
       state.priceUpdates[tokenId] = action.payload;
 
       // Update token in the list
@@ -55,6 +55,9 @@ const tokenSlice = createSlice({
         state.tokens[tokenIndex].price = price;
         state.tokens[tokenIndex].priceChange24h = priceChange24h;
         state.tokens[tokenIndex].priceChangePercent24h = priceChangePercent24h;
+        if (volume24h !== undefined) state.tokens[tokenIndex].volume24h = volume24h;
+        if (marketCap !== undefined) state.tokens[tokenIndex].marketCap = marketCap;
+        if (liquidity !== undefined) state.tokens[tokenIndex].liquidity = liquidity;
       }
 
       // Update filtered tokens
@@ -63,6 +66,9 @@ const tokenSlice = createSlice({
         state.filteredTokens[filteredIndex].price = price;
         state.filteredTokens[filteredIndex].priceChange24h = priceChange24h;
         state.filteredTokens[filteredIndex].priceChangePercent24h = priceChangePercent24h;
+        if (volume24h !== undefined) state.filteredTokens[filteredIndex].volume24h = volume24h;
+        if (marketCap !== undefined) state.filteredTokens[filteredIndex].marketCap = marketCap;
+        if (liquidity !== undefined) state.filteredTokens[filteredIndex].liquidity = liquidity;
       }
 
       // Update selected token if it's the one being updated
@@ -70,6 +76,9 @@ const tokenSlice = createSlice({
         state.selectedToken.price = price;
         state.selectedToken.priceChange24h = priceChange24h;
         state.selectedToken.priceChangePercent24h = priceChangePercent24h;
+        if (volume24h !== undefined) state.selectedToken.volume24h = volume24h;
+        if (marketCap !== undefined) state.selectedToken.marketCap = marketCap;
+        if (liquidity !== undefined) state.selectedToken.liquidity = liquidity;
       }
     },
   },
