@@ -136,7 +136,7 @@ src/
 
 4. **Open in browser**
    
-   Navigate to [http://localhost:3000](http://localhost:3000)
+   Navigate to [http://localhost:3000](http://localhost:3002)
 
 ### Build for Production
 
