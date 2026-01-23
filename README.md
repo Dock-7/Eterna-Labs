@@ -1,51 +1,45 @@
-# 🚀 Eterna Labs - Token Discovery Platform
+#  Eterna Labs - Token Discovery Platform
 
 A pixel-perfect, high-performance token discovery platform built with Next.js 16, React 19, TypeScript, and Tailwind CSS 4. Features real-time price updates, advanced filtering, responsive design, and accessibility compliance.
 
-![Next.js](https://img.shields.io/badge/Next.js-16.1.3-black?logo=next.js)
-![React](https://img.shields.io/badge/React-19.2.3-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-06B6D4?logo=tailwindcss)
-![License](https://img.shields.io/badge/License-MIT-green)
+Core Functionality
 
-## ✨ Features
+- Three-Column Token Layout: New Pairs, Final Stretch, and Migrated tokens
+- Real-time Price Updates: WebSocket simulation with smooth color transitions
+- Advanced Filtering: Filter tokens by market cap, volume, liquidity, and more
+- Multi-criteria Sorting: Sort by various metrics with ascending/descending options
+- Token Details Modal: Comprehensive token information with charts and actions
 
-### Core Functionality
-- **Three-Column Token Layout**: New Pairs, Final Stretch, and Migrated tokens
-- **Real-time Price Updates**: WebSocket simulation with smooth color transitions
-- **Advanced Filtering**: Filter tokens by market cap, volume, liquidity, and more
-- **Multi-criteria Sorting**: Sort by various metrics with ascending/descending options
-- **Token Details Modal**: Comprehensive token information with charts and actions
+UI/UX
 
-### UI/UX
-- **Fully Responsive**: Works seamlessly from 320px to 4K displays
-- **Mobile Bottom Navigation**: Touch-friendly navigation for mobile devices
-- **Column Selector**: Mobile-friendly dropdown to switch between token categories
-- **Skeleton Loading**: Beautiful loading states with shimmer animations
-- **Toast Notifications**: User feedback for actions
+- Fully Responsive: Works seamlessly from 320px to 4K displays
+- Mobile Bottom Navigation: Touch-friendly navigation for mobile devices
+- Column Selector: Mobile-friendly dropdown to switch between token categories
+- Skeleton Loading: Beautiful loading states with shimmer animations
+- Toast Notifications: User feedback for actions
 
-### Performance & Accessibility
-- **Lighthouse Score ≥90**: Optimized for performance, accessibility, best practices, and SEO
-- **WCAG 2.1 Compliant**: Proper contrast ratios, aria-labels, and touch targets
-- **Memoized Components**: Optimized re-renders with React.memo and useMemo
-- **Code Splitting**: Automatic code splitting with Next.js App Router
+Performance & Accessibility
+
+- Lighthouse Score ≥90: Optimized for performance, accessibility, best practices, and SEO
+- WCAG 2.1 Compliant: Proper contrast ratios, aria-labels, and touch targets
+- Memoized Components: Optimized re-renders with React.memo and useMemo
+- Code Splitting: Automatic code splitting with Next.js App Router
 
 ## 🛠️ Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| **Framework** | Next.js 16 (App Router) |
-| **Language** | TypeScript 5 (Strict Mode) |
-| **UI Library** | React 19 |
-| **Styling** | Tailwind CSS 4 |
-| **State Management** | Redux Toolkit 2.2 |
-| **Data Fetching** | TanStack React Query 5 |
-| **UI Components** | Radix UI (Dialog, Popover, Tooltip) |
-| **Charts** | Recharts |
-| **Icons** | Lucide React |
-| **Architecture** | Atomic Design Pattern |
+Category :	Technology
+Framework :	Next.js 16 (App Router)
+Language :	TypeScript 5 (Strict Mode)
+UI Library :	React 19
+Styling	Tailwind : CSS 4
+State Management :	Redux Toolkit 2.2
+Data Fetching :	TanStack React Query 5
+UI Components :	Radix UI (Dialog, Popover, Tooltip)
+Charts :	Recharts
+Icons :	Lucide React
+Architecture :	Atomic Design Pattern
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -101,19 +95,19 @@ src/
     └── tokenSlice.ts           # Token state management
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
-- **Node.js** 18.17 or later
-- **npm** 9+ or **yarn** 1.22+ or **pnpm** 8+
+- Node.js 18.17 or later
+- npm 9+ or yarn 1.22+ or pnpm 8+
 
 ### Installation
 
-1. **Clone the repository**
+1. Clone the repository
    ```bash
-   git clone https://github.com/Dock-7/eterna-labs-pulse.git
-   cd eterna-labs-pulse
+   git clone https://github.com/Dock-7/Eterna-Labs.git
+   cd Eterna-Labs
    ```
 
 2. **Install dependencies**
@@ -134,10 +128,6 @@ src/
    pnpm dev
    ```
 
-4. **Open in browser**
-   
-   Navigate to [http://localhost:3000](http://localhost:3002)
-
 ### Build for Production
 
 ```bash
@@ -148,7 +138,7 @@ npm run build
 npm start
 ```
 
-## 📱 Responsive Breakpoints
+##  Responsive Breakpoints
 
 | Breakpoint | Width | Layout |
 |------------|-------|--------|
@@ -157,7 +147,18 @@ npm start
 | Desktop | 1024px - 1310px | Single column with horizontal scroll option |
 | Large Desktop | > 1310px | Three-column side-by-side layout |
 
-## 🎨 Key Features Implementation
+## Screenshots
+
+### Desktop View
+![Desktop View](public/desktop.png)
+
+
+### Mobile View
+![Mobile View](public/mobile.png)
+
+
+
+##  Key Features Implementation
 
 ### Real-time Price Updates
 ```typescript
@@ -183,18 +184,6 @@ useWsMock(tokens); // Simulates real-time price updates
 - Social links and contract info
 - Copy address functionality
 
-## 🔧 Configuration
-
-### Environment Variables
-
-No environment variables are required for the mock implementation. For production:
-
-```env
-# Optional: Add your API endpoints
-NEXT_PUBLIC_API_URL=https://your-api.com
-NEXT_PUBLIC_WS_URL=wss://your-websocket.com
-```
-
 ### Tailwind Configuration
 
 Custom configuration in `tailwind.config.ts` includes:
@@ -203,7 +192,7 @@ Custom configuration in `tailwind.config.ts` includes:
 - Animation utilities
 - Scrollbar hiding utilities
 
-## 📊 Performance Metrics
+##  Performance Metrics
 
 Target Lighthouse Scores:
 
@@ -214,71 +203,7 @@ Target Lighthouse Scores:
 | Best Practices | ≥90 | Modern web standards |
 | SEO | ≥90 | Search engine optimized |
 
-## 🌐 Deployment
 
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Go to [Vercel](https://vercel.com)
-3. Click "New Project"
-4. Import your GitHub repository
-5. Vercel auto-detects Next.js and deploys
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Dock-7/eterna-labs-pulse)
-
-### Netlify
-
-```bash
-# Install Netlify CLI
-npm install -g netlify-cli
-
-# Build and deploy
-npm run build
-netlify deploy --prod --dir=.next
-```
-
-### Docker
-
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
-## 🧪 Scripts
-
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Create production build |
-| `npm start` | Start production server |
-| `npm run lint` | Run ESLint |
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Design inspired by [Axiom Trade](https://axiom.trade/pulse)
-- Built with [Next.js](https://nextjs.org/)
-- UI components from [Radix UI](https://www.radix-ui.com/)
-- Icons from [Lucide](https://lucide.dev/)
-
----
 
 <p align="center">
   Made with ❤️ by <a href="https://github.com/Dock-7">Your Name</a>
