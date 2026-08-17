@@ -6,7 +6,7 @@
 
 import { memo, useEffect, useMemo, useState, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/useRedux';
-import { setTokens } from '@/src/store/tokenSlice';
+import { setTokens, setFilters } from '@/src/store/tokenSlice';
 import { useTokensQuery } from '@/src/hooks/useTokensQuery';
 import { useWsMock } from '@/src/hooks/useWsMock';
 import { selectFilteredTokens } from '@/src/store/selectors';
@@ -580,11 +580,7 @@ const [activeFilterColumn, setActiveFilterColumn] =
         status={activeFilterColumn}
         onOpenChange={setOpenFilter}
         onApplyFilters={(filters) => {
-          console.log(
-            'APPLIED FILTERS FOR',
-            activeFilterColumn,
-            filters
-          );
+          dispatch(setFilters({ search: filters.search || undefined }));
         }}
       />
 
