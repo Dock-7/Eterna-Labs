@@ -5,7 +5,7 @@
 
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from './index';
-import { Token, TokenStatus } from '@/src/lib/types';
+import { TokenStatus } from '@/src/lib/types';
 
 /**
  * Select filtered tokens with memoization
