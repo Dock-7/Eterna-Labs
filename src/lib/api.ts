@@ -52,7 +52,7 @@ export function generateMockTokens(): Token[] {
       sparkline,
       status: statuses[i % statuses.length],
       chain: chains[i % chains.length],
-      pairAddress: `0x${Math.random().toString(16).substr(2, 40)}`,
+      pairAddress: `0x${Math.random().toString(16).slice(2, 42)}`,
       createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
     });
   }
