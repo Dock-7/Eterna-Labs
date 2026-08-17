@@ -6,6 +6,7 @@
 import { useEffect, useRef } from 'react';
 
 export function usePerformanceMonitor(componentName: string) {
+  // eslint-disable-next-line react-hooks/purity -- reading the clock here is required to measure render duration; it never affects render output
   const renderStart = useRef<number>(performance.now());
 
   useEffect(() => {
