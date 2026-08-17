@@ -7,7 +7,7 @@
 
 import { memo, useState, useEffect, useRef } from 'react';
 import { cn } from '@/src/lib/utils';
-import { ChevronDown, Wallet, Settings, MessageCircle, Compass, TrendingUp, BarChart3, Radio, Hand, Bell, Palette, X, Search, HelpCircle, FileText, Grid3x3 } from 'lucide-react';
+import { ChevronDown, Wallet, Settings, MessageCircle, Compass, TrendingUp, BarChart3, Radio, Hand, Bell, Palette, FileText, Grid3x3, type LucideIcon } from 'lucide-react';
 import Image from 'next/image';
 
 interface BottomBarProps {
@@ -20,7 +20,7 @@ const Separator = ({ className }: { className?: string } = {}) => (
 );
 
 // Navigation item with red dot indicator
-const NavItemWithDot = ({ icon: Icon, label, href, className }: { icon: any; label: string; href: string; className?: string }) => (
+const NavItemWithDot = ({ icon: Icon, label, href, className }: { icon: LucideIcon; label: string; href: string; className?: string }) => (
   <a href={href} className={cn("relative flex items-center gap-0.5 sm:gap-1 md:gap-1.5 px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-white hover:text-slate-300 transition-colors whitespace-nowrap flex-shrink-0", className)}>
     <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 flex-shrink-0" />
     <span className="inline whitespace-nowrap">{label}</span>
