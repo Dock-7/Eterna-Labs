@@ -99,7 +99,7 @@ src/
 
 ### Prerequisites
 
-- Node.js 18.17 or later
+- Node.js 20.9 or later (Next.js 16 requires it; see `.nvmrc`)
 - npm 9+ or yarn 1.22+ or pnpm 8+
 
 ### Installation
@@ -136,6 +136,14 @@ npm run build
 
 # Start production server
 npm start
+```
+
+### Other Scripts
+
+```bash
+npm run lint       # ESLint
+npm run typecheck  # tsc --noEmit
+npm run test       # Vitest unit tests
 ```
 
 ##  Responsive Breakpoints
