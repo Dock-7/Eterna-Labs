@@ -8,7 +8,7 @@
 import { memo, useState, useRef, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/useRedux';
 import { setSort } from '@/src/store/tokenSlice';
-import { SortField, SortDirection } from '@/src/lib/types';
+import { SortField } from '@/src/lib/types';
 import { ArrowUpDown, ArrowUp, ArrowDown, ChevronDown } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 
@@ -110,7 +110,16 @@ export const Sorting = memo(function Sorting({
           <ArrowUpDown className="w-3 h-3 sm:w-4 sm:h-4" />
           <span className="hidden sm:inline">{getCurrentSortLabel()}</span>
           <span className="sm:hidden">Sort</span>
-          {getDirectionIcon()}
+          <span
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleDirection();
+            }}
+            className="hover:text-blue-400 transition-colors"
+            aria-label={`Toggle sort direction, currently ${currentSort.direction === 'asc' ? 'ascending' : 'descending'}`}
+          >
+            {getDirectionIcon()}
+          </span>
           <ChevronDown className={cn("w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform", isOpen && "rotate-180")} />
         </button>
 
