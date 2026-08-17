@@ -89,7 +89,6 @@ export const TokenDetailsDialog = memo(function TokenDetailsDialog() {
                 animate={true}
                 animationInterval={800}
                 showAxes={true}
-                basePrice={selectedToken.price}
               />
             </div>
           </div>

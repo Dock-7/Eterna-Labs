@@ -7,12 +7,10 @@
 'use client';
 
 import { memo, useMemo, useState, useEffect, useRef } from 'react';
-import { 
-  LineChart, 
-  Line, 
-  ResponsiveContainer, 
-  XAxis, 
-  YAxis, 
+import {
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
   Tooltip,
   ReferenceLine,
   Area,
@@ -28,7 +26,6 @@ interface SparklineProps {
   animate?: boolean;
   animationInterval?: number;
   showAxes?: boolean; // Show X and Y axes for detailed view
-  basePrice?: number; // Base price for reference
 }
 
 // Format price for Y-axis
@@ -54,20 +51,20 @@ export const Sparkline = memo(function Sparkline({
   animate = false,
   animationInterval = 1000,
   showAxes = false,
-  basePrice,
 }: SparklineProps) {
   const [liveData, setLiveData] = useState<number[]>(data);
   const lastValueRef = useRef(data[data.length - 1] || 0);
   const tickCountRef = useRef(0);
 
-  // Real-time animation effect
+  // Resync internal animation state whenever the incoming `data` prop
+  // changes (new token data fetched) or animation is toggled off.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing local animation state to the `data` prop is the intended behavior here, not a side effect of an unrelated render
+    setLiveData(data);
     if (!animate || data.length === 0) {
-      setLiveData(data);
       return;
     }
 
-    setLiveData(data);
     lastValueRef.current = data[data.length - 1] || 0;
     tickCountRef.current = 0;
 
