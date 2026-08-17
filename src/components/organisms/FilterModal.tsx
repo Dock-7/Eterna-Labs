@@ -8,14 +8,14 @@
 import { memo, useState, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X, RefreshCw } from 'lucide-react';
-import { TokenStatus } from '@/src/lib/types';
+import { AdvancedFilterState, TokenStatus } from '@/src/lib/types';
 import { cn } from '@/src/lib/utils';
 
 interface FilterModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   status: TokenStatus;
-  onApplyFilters: (filters: any) => void;
+  onApplyFilters: (filters: AdvancedFilterState) => void;
 }
 
 /* ---------------- DATA ---------------- */
@@ -87,7 +87,11 @@ export const FilterModal = memo(function FilterModal({
   const toggleProtocol = useCallback((id: string) => {
     setSelectedProtocols((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
       return next;
     });
   }, []);

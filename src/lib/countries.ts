@@ -76,3 +76,9 @@ export function getDefaultCountry(): Country {
   }
   return COUNTRIES[0]; // Default to US
 }
+
+export function setStoredCountry(code: string): void {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('axiom_country', code);
+  }
+}

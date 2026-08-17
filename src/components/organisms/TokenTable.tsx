@@ -6,7 +6,7 @@
 
 import { memo, useEffect, useMemo, useState, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/useRedux';
-import { setTokens } from '@/src/store/tokenSlice';
+import { setTokens, setFilters } from '@/src/store/tokenSlice';
 import { useTokensQuery } from '@/src/hooks/useTokensQuery';
 import { useWsMock } from '@/src/hooks/useWsMock';
 import { selectFilteredTokens } from '@/src/store/selectors';
@@ -14,9 +14,8 @@ import { TokenRow } from './TokenRow';
 import { Skeleton } from '@/src/components/atoms/Skeleton';
 import { TokenDetailsDialog } from './TokenDetailsDialog';
 import { TokenStatus } from '@/src/lib/types';
-import { Menu, Volume2, Wallet, ChevronDown, Settings, Star, TrendingUp, Zap, Filter } from 'lucide-react';
+import { Menu, Volume2, Wallet, ChevronDown, Zap, Filter } from 'lucide-react';
 import Image from 'next/image';
-import { Tooltip } from '@/src/components/atoms/Tooltip';
 import { cn } from '@/src/lib/utils';
 import { FilterModal } from '@/src/components/organisms/FilterModal';
 import { Sorting } from '@/src/components/organisms/Sorting';
@@ -581,11 +580,7 @@ const [activeFilterColumn, setActiveFilterColumn] =
         status={activeFilterColumn}
         onOpenChange={setOpenFilter}
         onApplyFilters={(filters) => {
-          console.log(
-            'APPLIED FILTERS FOR',
-            activeFilterColumn,
-            filters
-          );
+          dispatch(setFilters({ search: filters.search || undefined }));
         }}
       />
 

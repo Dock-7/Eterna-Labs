@@ -5,7 +5,7 @@
 'use client';
 
 import * as Dialog from '@radix-ui/react-dialog';
-import { memo, useState, useEffect, useCallback } from 'react';
+import { memo, useState, useCallback, type ReactElement } from 'react';
 import { X, Copy, ArrowUpDown, ChevronDown } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 import { cn } from '@/src/lib/utils';
@@ -32,6 +32,11 @@ const BNBIcon = ({ className }: { className?: string }) => (
   </div>
 );
 
+const CURRENCY_ICONS: Record<string, (props: { className?: string }) => ReactElement> = {
+  SOL: SolanaIcon,
+  BNB: BNBIcon,
+};
+
 export const ExchangeModal = memo(function ExchangeModal({
   open,
   onOpenChange,
@@ -39,12 +44,16 @@ export const ExchangeModal = memo(function ExchangeModal({
 }: ExchangeModalProps) {
   const [activeTab, setActiveTab] = useState<TabType>(initialTab);
 
-  // Reset to initial tab when modal opens
-  useEffect(() => {
+  // Reset to initial tab when the modal transitions from closed to open.
+  // Adjusted directly during render (rather than in an effect) per React's
+  // guidance for resetting state in response to a prop change.
+  const [wasOpen, setWasOpen] = useState(open);
+  if (open !== wasOpen) {
+    setWasOpen(open);
     if (open) {
       setActiveTab(initialTab);
     }
-  }, [open, initialTab]);
+  }
   const [convertFrom, setConvertFrom] = useState('SOL');
   const [convertTo, setConvertTo] = useState('BNB');
   const [buyAmount, setBuyAmount] = useState('0.0');
@@ -64,6 +73,14 @@ export const ExchangeModal = memo(function ExchangeModal({
       console.error('Failed to copy:', err);
     }
   }, [depositAddress]);
+
+  const handleSwapDirection = useCallback(() => {
+    setConvertFrom(convertTo);
+    setConvertTo(convertFrom);
+  }, [convertFrom, convertTo]);
+
+  const ConvertFromIcon = CURRENCY_ICONS[convertFrom] ?? SolanaIcon;
+  const ConvertToIcon = CURRENCY_ICONS[convertTo] ?? BNBIcon;
 
   const tabs = [
     { id: 'convert' as TabType, label: 'Convert' },
@@ -114,7 +131,7 @@ export const ExchangeModal = memo(function ExchangeModal({
             {/* Convert Tab */}
             {activeTab === 'convert' && (
             <div className="space-y-3 pb-2">
-              <h3 className="text-base font-semibold text-white mb-3">Swap SOL for BNB</h3>
+              <h3 className="text-base font-semibold text-white mb-3">Swap {convertFrom} for {convertTo}</h3>
               
               {/* Converting Field */}
               <div className="space-y-1.5">
@@ -131,8 +148,8 @@ export const ExchangeModal = memo(function ExchangeModal({
                     className="w-full px-3 py-2 text-base bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
-                    <SolanaIcon className="w-4 h-4" />
-                    <span className="text-white text-xs font-medium">SOL</span>
+                    <ConvertFromIcon className="w-4 h-4" />
+                    <span className="text-white text-xs font-medium">{convertFrom}</span>
                     <ChevronDown className="w-3 h-3 text-slate-400" />
                   </div>
                 </div>
@@ -141,9 +158,13 @@ export const ExchangeModal = memo(function ExchangeModal({
 
               {/* Swap Icon */}
               <div className="flex justify-center my-3">
-                <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">
+                <button
+                  onClick={handleSwapDirection}
+                  className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center hover:bg-slate-700 transition-colors"
+                  aria-label="Swap conversion direction"
+                >
                   <ArrowUpDown className="w-4 h-4 text-white" />
-                </div>
+                </button>
               </div>
 
               {/* Gaining Field */}
@@ -161,12 +182,12 @@ export const ExchangeModal = memo(function ExchangeModal({
                     className="w-full px-3 py-2 text-sm bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none"
                   />
                   <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
-                    <BNBIcon className="w-4 h-4" />
-                    <span className="text-white text-xs font-medium">BNB</span>
+                    <ConvertToIcon className="w-4 h-4" />
+                    <span className="text-white text-xs font-medium">{convertTo}</span>
                     <ChevronDown className="w-3 h-3 text-slate-400" />
                   </div>
                 </div>
-                <div className="text-[10px] text-slate-400">1 SOL ≈ 0.1415 BNB</div>
+                <div className="text-[10px] text-slate-400">1 {convertFrom} ≈ 0.1415 {convertTo}</div>
               </div>
 
               {/* Confirm Button */}
@@ -241,7 +262,7 @@ export const ExchangeModal = memo(function ExchangeModal({
               {/* Onramper Link */}
               <div className="text-center">
                 <p className="text-xs text-slate-400 mb-2">
-                  Don't have any Solana?{' '}
+                  Don&apos;t have any Solana?{' '}
                   <a
                     href="https://onramper.com"
                     target="_blank"

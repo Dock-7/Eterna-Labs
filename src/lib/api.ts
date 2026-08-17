@@ -25,6 +25,18 @@ export async function fetchTokens(): Promise<Token[]> {
 }
 
 /**
+ * Generate a random 40-character hex string prefixed with 0x, matching the
+ * shape of a real EVM address.
+ */
+function generateMockAddress(): string {
+  let hex = '';
+  for (let i = 0; i < 40; i++) {
+    hex += Math.floor(Math.random() * 16).toString(16);
+  }
+  return `0x${hex}`;
+}
+
+/**
  * Generate mock token data for development/testing
  */
 export function generateMockTokens(): Token[] {
@@ -52,7 +64,7 @@ export function generateMockTokens(): Token[] {
       sparkline,
       status: statuses[i % statuses.length],
       chain: chains[i % chains.length],
-      pairAddress: `0x${Math.random().toString(16).substr(2, 40)}`,
+      pairAddress: generateMockAddress(),
       createdAt: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
     });
   }

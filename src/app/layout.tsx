@@ -6,8 +6,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
-import { Topbar } from '@/src/components/layout/Topbar';
-import { BottomBar } from '@/src/components/layout/BottomBar';
 import { MobileBottomBar } from '@/src/components/layout/MobileBottomBar';
 
 const inter = Inter({ 

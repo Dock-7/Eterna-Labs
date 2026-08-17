@@ -6,12 +6,11 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { memo, useCallback } from 'react';
-import { Token } from '@/src/lib/types';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/useRedux';
 import { setSelectedToken } from '@/src/store/tokenSlice';
 import { TokenBadges } from '@/src/components/molecules/TokenBadges';
 import { Sparkline } from '@/src/components/molecules/Sparkline';
-import { formatCurrency, formatNumber, formatPercentage } from '@/src/lib/api';
+import { formatCurrency, formatPercentage } from '@/src/lib/api';
 import { cn } from '@/src/lib/utils';
 import { X, ExternalLink } from 'lucide-react';
 
@@ -90,7 +89,6 @@ export const TokenDetailsDialog = memo(function TokenDetailsDialog() {
                 animate={true}
                 animationInterval={800}
                 showAxes={true}
-                basePrice={selectedToken.price}
               />
             </div>
           </div>

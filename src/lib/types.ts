@@ -27,6 +27,13 @@ export interface TokenTableFilters {
   search?: string;
 }
 
+export interface AdvancedFilterState {
+  status: TokenStatus;
+  search: string;
+  exclude: string;
+  protocols: string[];
+}
+
 export type SortField = 'price' | 'priceChange24h' | 'volume24h' | 'marketCap' | 'liquidity' | 'createdAt';
 export type SortDirection = 'asc' | 'desc';
 
