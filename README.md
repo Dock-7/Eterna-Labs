@@ -99,7 +99,7 @@ src/
 
 ### Prerequisites
 
-- Node.js 20.9 or later (Next.js 16 requires it; see `.nvmrc`)
+- Node.js 20.19 or later (Next.js 16 requires it; see `.nvmrc`)
 - npm 9+ or yarn 1.22+ or pnpm 8+
 
 ### Installation
