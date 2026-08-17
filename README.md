@@ -83,7 +83,6 @@ src/
 ├── lib/                         # Utilities & helpers
 │   ├── api.ts                  # API client functions
 │   ├── countries.ts            # Country data
-│   ├── performance.ts          # Performance utilities
 │   ├── subscription.ts         # Subscription helpers
 │   ├── types.ts                # TypeScript types
 │   └── utils.ts                # Utility functions
@@ -158,11 +157,11 @@ npm run test       # Vitest unit tests
 ## Screenshots
 
 ### Desktop View
-![Desktop View](public/desktop.png)
+![Desktop View](public/DesktopView.png)
 
 
 ### Mobile View
-![Mobile View](public/mobile.png)
+![Mobile View](public/MobileView.png)
 
 
 
