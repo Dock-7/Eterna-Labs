@@ -1,5 +1,5 @@
 /**
- * Bottom bar component matching Axiom Trade design
+ * Bottom bar component matching Eterna Labs design
  * Fully responsive across all breakpoints
  */
 

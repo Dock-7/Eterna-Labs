@@ -1,5 +1,5 @@
 /**
- * Axiom-style Filter Modal
+ * Eterna Labs Filter Modal
  * Fixed dimensions, top-offset, internal scroll, responsive
  */
 

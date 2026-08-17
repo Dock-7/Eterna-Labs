@@ -1,5 +1,5 @@
 /**
- * Top navigation bar component matching Axiom Trade design
+ * Top navigation bar component matching Eterna Labs design
  */
 
 'use client';
@@ -138,7 +138,7 @@ export const Topbar = memo(function Topbar({ className }: TopbarProps) {
   </span>
 </div>
 
-{/* Scrollable Nav (Axiom style) */}
+{/* Scrollable Nav (Eterna Labs style) */}
 <nav
   className="
     flex items-center gap-4

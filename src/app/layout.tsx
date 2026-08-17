@@ -16,7 +16,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Eterna Labs',
-  description: 'Pixel-perfect replica of Axiom Trade token discovery table',
+  description: 'Eterna Labs token discovery platform',
   icons: {
     icon: '/logo.png',
   },

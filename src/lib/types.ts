@@ -1,5 +1,5 @@
 /**
- * Type definitions for the Axiom Trade Token Discovery Table
+ * Type definitions for the Eterna Labs Token Discovery Table
  */
 
 export type TokenStatus = 'new' | 'final_stretch' | 'migrated';
