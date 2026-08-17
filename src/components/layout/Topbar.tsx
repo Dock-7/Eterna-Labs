@@ -8,7 +8,9 @@ import { memo, useState, useEffect, useRef } from 'react';
 import { cn } from '@/src/lib/utils';
 import { Search, Bell, Settings, ChevronDown, Star, Wallet, User, LogOut, Rocket, Languages, TrendingUp, Menu, X, Eye, Gift, DollarSign, Globe } from 'lucide-react';
 import { ExchangeModal } from '@/src/components/organisms/ExchangeModal';
+import { CountrySelector } from '@/src/components/organisms/CountrySelector';
 import { Tooltip } from '@/src/components/atoms/Tooltip';
+import { getDefaultCountry, setStoredCountry, type Country } from '@/src/lib/countries';
 import Image from "next/image";
 
 
@@ -62,6 +64,8 @@ export const Topbar = memo(function Topbar({ className }: TopbarProps) {
   const [showWalletDropdown, setShowWalletDropdown] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showCountrySelector, setShowCountrySelector] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<Country>(() => getDefaultCountry());
   const networkDropdownRef = useRef<HTMLDivElement>(null);
   const walletDropdownRef = useRef<HTMLDivElement>(null);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
@@ -449,6 +453,17 @@ export const Topbar = memo(function Topbar({ className }: TopbarProps) {
       {/* Exchange Modal */}
       <ExchangeModal open={showExchangeModal} onOpenChange={setShowExchangeModal} initialTab="deposit" />
 
+      {/* Country/Region Selector */}
+      <CountrySelector
+        open={showCountrySelector}
+        onOpenChange={setShowCountrySelector}
+        selected={selectedCountry}
+        onSelect={(country) => {
+          setSelectedCountry(country);
+          setStoredCountry(country.code);
+        }}
+      />
+
       {/* Mobile Menu - Sidebar/Drawer from left */}
       {showMobileMenu && (
         <>
@@ -530,11 +545,19 @@ export const Topbar = memo(function Topbar({ className }: TopbarProps) {
                 </div>
                 <div className="flex flex-col space-y-1">
                   <button
-                    onClick={() => setShowMobileMenu(false)}
-                    className="flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-lg text-white hover:bg-slate-800 transition-colors text-left"
+                    onClick={() => {
+                      setShowMobileMenu(false);
+                      setShowCountrySelector(true);
+                    }}
+                    className="flex items-center justify-between gap-3 px-4 py-3 text-sm font-medium rounded-lg text-white hover:bg-slate-800 transition-colors text-left"
                   >
-                    <Globe className="w-5 h-5 text-slate-400" />
-                    <span>Regions</span>
+                    <span className="flex items-center gap-3">
+                      <Globe className="w-5 h-5 text-slate-400" />
+                      <span>Regions</span>
+                    </span>
+                    <span className="text-xs text-slate-400">
+                      {selectedCountry.flag} {selectedCountry.code}
+                    </span>
                   </button>
                   <button
                     onClick={() => setShowMobileMenu(false)}
