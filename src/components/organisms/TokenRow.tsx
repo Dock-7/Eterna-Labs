@@ -1,5 +1,5 @@
 /**
- * Token row component matching Axiom Trade design
+ * Token row component matching Eterna Labs design
  */
 
 'use client';

@@ -68,7 +68,7 @@ export function getCountryByCode(code: string): Country | undefined {
 export function getDefaultCountry(): Country {
   // Try to detect from browser or default to US
   if (typeof window !== 'undefined') {
-    const stored = localStorage.getItem('axiom_country');
+    const stored = localStorage.getItem('eterna_country');
     if (stored) {
       const country = getCountryByCode(stored);
       if (country) return country;
@@ -79,6 +79,6 @@ export function getDefaultCountry(): Country {
 
 export function setStoredCountry(code: string): void {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('axiom_country', code);
+    localStorage.setItem('eterna_country', code);
   }
 }

@@ -1,4 +1,4 @@
-# Requirements Checklist - Axiom Trade Token Discovery Table
+# Requirements Checklist - Eterna Labs Token Discovery Table
 
 ## ✅ Core Features
 
@@ -6,7 +6,7 @@
 - ✅ **New Pairs** - Implemented with dedicated column and blue badge
 - ✅ **Final Stretch** - Implemented with dedicated column and orange badge  
 - ✅ **Migrated** - Implemented with dedicated column and purple badge
-- ✅ Three-column layout matching Axiom Trade design
+- ✅ Three-column layout matching the target design
 
 ### Component Variety
 - ✅ **Popover** - SortPopover component using Radix UI
@@ -32,7 +32,7 @@
 - ✅ **Error Boundaries** - ErrorBoundary component catches and displays errors gracefully
 
 ### Pixel-Perfect Visual Match
-- ✅ Dark theme matching Axiom Trade aesthetic
+- ✅ Dark theme matching the target aesthetic
 - ✅ Three-column layout with status headers
 - ✅ Token badges and status indicators
 - ✅ Responsive design down to 320px
@@ -158,7 +158,7 @@ src/
 - ✅ DRY principles
 
 ### Pixel-Perfect UI (25%)
-- ✅ Visual match to Axiom Trade
+- ✅ Visual match to the target design
 - ✅ Three-column layout
 - ✅ Status badges
 - ✅ Responsive design

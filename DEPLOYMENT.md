@@ -7,7 +7,7 @@
    ```bash
    git init
    git add .
-   git commit -m "Initial commit: Axiom Trade Token Discovery Table"
+   git commit -m "Initial commit: Eterna Labs Token Discovery Table"
    ```
 
 2. Push to GitHub:

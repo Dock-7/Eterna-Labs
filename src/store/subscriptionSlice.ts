@@ -15,7 +15,7 @@ const initialState: SubscriptionState = {
   subscription: (() => {
     // Load from localStorage if available
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('axiom_subscription');
+      const stored = localStorage.getItem('eterna_subscription');
       if (stored) {
         try {
           return JSON.parse(stored);
@@ -39,9 +39,9 @@ const subscriptionSlice = createSlice({
       // Persist to localStorage
       if (typeof window !== 'undefined') {
         if (action.payload) {
-          localStorage.setItem('axiom_subscription', JSON.stringify(action.payload));
+          localStorage.setItem('eterna_subscription', JSON.stringify(action.payload));
         } else {
-          localStorage.removeItem('axiom_subscription');
+          localStorage.removeItem('eterna_subscription');
         }
       }
     },
@@ -61,7 +61,7 @@ const subscriptionSlice = createSlice({
 
       // Persist to localStorage
       if (typeof window !== 'undefined') {
-        localStorage.setItem('axiom_subscription', JSON.stringify(state.subscription));
+        localStorage.setItem('eterna_subscription', JSON.stringify(state.subscription));
       }
     },
     cancelSubscription: (state) => {
@@ -69,7 +69,7 @@ const subscriptionSlice = createSlice({
         state.subscription.isActive = false;
         // Persist to localStorage
         if (typeof window !== 'undefined') {
-          localStorage.setItem('axiom_subscription', JSON.stringify(state.subscription));
+          localStorage.setItem('eterna_subscription', JSON.stringify(state.subscription));
         }
       }
     },
