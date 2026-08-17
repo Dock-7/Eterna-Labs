@@ -7,8 +7,6 @@
 import { memo, useState, useEffect, useRef } from 'react';
 import { cn } from '@/src/lib/utils';
 import { Search, Bell, Settings, ChevronDown, Star, Wallet, User, LogOut, Rocket, Languages, TrendingUp, Menu, X, Eye, Gift, DollarSign, Globe } from 'lucide-react';
-import { useAppSelector } from '@/src/hooks/useRedux';
-import { isProOrHigher } from '@/src/lib/subscription';
 import { ExchangeModal } from '@/src/components/organisms/ExchangeModal';
 import { Tooltip } from '@/src/components/atoms/Tooltip';
 import Image from "next/image";
@@ -68,8 +66,6 @@ export const Topbar = memo(function Topbar({ className }: TopbarProps) {
   const walletDropdownRef = useRef<HTMLDivElement>(null);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const subscription = useAppSelector((state) => state.subscription.subscription);
-  const isPro = isProOrHigher(subscription);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -131,7 +127,7 @@ export const Topbar = memo(function Topbar({ className }: TopbarProps) {
 {/* Logo */}
 <div className="flex items-center gap-2.5 flex-shrink-0">
   <div className="w-6 h-6 sm:w-8 sm:h-8">
-    <img src="/logo.png" alt="Eterna Labs logo" className="w-full h-full object-contain" />
+    <Image src="/logo.png" alt="Eterna Labs logo" width={32} height={32} className="w-full h-full object-contain" />
   </div>
   <span className="text-sm sm:text-lg font-semibold text-white whitespace-nowrap">
     Eterna Labs
