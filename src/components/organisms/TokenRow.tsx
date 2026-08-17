@@ -8,11 +8,10 @@ import { memo, useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { Token } from '@/src/lib/types';
 import { useAppDispatch } from '@/src/hooks/useRedux';
 import { setSelectedToken } from '@/src/store/tokenSlice';
-import { Tooltip } from '@/src/components/atoms/Tooltip';
-import { formatCurrency, formatNumber, formatPercentage } from '@/src/lib/api';
+import { formatCurrency } from '@/src/lib/api';
 import { cn } from '@/src/lib/utils';
 import { usePerformanceMonitor } from '@/src/hooks/usePerformance';
-import { Copy, Search, Users, BarChart3, Trophy, Crown, Eye, Flame } from 'lucide-react';
+import { Copy, Check, Search, Users, BarChart3, Trophy, Crown, Eye, Flame } from 'lucide-react';
 import Image from 'next/image';
 
 interface TokenRowProps {
@@ -43,7 +42,6 @@ export const TokenRow = memo(function TokenRow({ token, isSelected }: TokenRowPr
   }, [token.symbol]);
 
   // Memoize formatted values to prevent recalculation
-  const formattedPrice = useMemo(() => formatCurrency(token.price), [token.price]);
   const formattedMarketCap = useMemo(() => formatCurrency(token.marketCap), [token.marketCap]);
   const formattedVolume = useMemo(() => formatCurrency(token.volume24h), [token.volume24h]);
   
@@ -54,7 +52,6 @@ export const TokenRow = memo(function TokenRow({ token, isSelected }: TokenRowPr
   }, [token.id]);
 
   const tokenSymbol = useMemo(() => token.symbol.substring(0, 2).toUpperCase(), [token.symbol]);
-  const tokenId = useMemo(() => token.id.split('-')[1] || '000', [token.id]);
   const shortAddress = useMemo(() => {
     const addr = token.pairAddress || token.id;
     return `${addr.substring(0, 4)}...${addr.substring(addr.length - 4)}`;
@@ -122,20 +119,19 @@ export const TokenRow = memo(function TokenRow({ token, isSelected }: TokenRowPr
   // Track previous percentages for change detection
   const prevPercentagesRef = useRef<Record<string, number>>({});
   const [changedBadges, setChangedBadges] = useState<Set<string>>(new Set());
-  
-  // Force re-render every second to update time-based percentages
-  const [updateTrigger, setUpdateTrigger] = useState(0);
+
+  // Track current time to drive time-based percentage animation, refreshed every second
+  const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
     const interval = setInterval(() => {
-      setUpdateTrigger(prev => prev + 1);
+      setNow(Date.now());
     }, 1000); // Update every second
     return () => clearInterval(interval);
   }, []);
 
   // Calculate real-time percentages based on token data with staggered variation
   const percentages = useMemo(() => {
-    const now = Date.now();
-    
+
     // Badge 1 - Price change (updates first, cycle: 12s)
     const badge1Time = ((now + 0) % 12000) / 12000;
     const priceChangeAbs = Math.abs(token.priceChangePercent24h);
@@ -180,9 +176,13 @@ export const TokenRow = memo(function TokenRow({ token, isSelected }: TokenRowPr
       badge4: Math.min(99, Math.max(0, holderPercent)),
       badge5: Math.min(99, Math.max(0, statusPercent)),
     };
-  }, [token.priceChangePercent24h, token.liquidity, token.marketCap, token.volume24h, token.status, tokenHash, updateTrigger]);
+  }, [token.priceChangePercent24h, token.liquidity, token.marketCap, token.volume24h, token.status, now]);
 
-  // Detect changes and trigger flash animation, especially color changes
+  // Detect changes and trigger flash animation, especially color changes.
+  // This effect intentionally synchronizes local animation state (which
+  // badges are flashing, and for how long) with derived `percentages`
+  // values, then schedules the CSS flash to clear itself — a legitimate
+  // "synchronize with an external timer" use of an effect.
   useEffect(() => {
     const changed = new Set<string>();
     const colorChanged = new Set<string>();
@@ -191,13 +191,13 @@ export const TokenRow = memo(function TokenRow({ token, isSelected }: TokenRowPr
     Object.keys(percentages).forEach((key) => {
       const current = percentages[key as keyof typeof percentages];
       const previous = prev[key];
-      
+
       if (previous !== undefined) {
         // Detect any value change
         if (Math.abs(current - previous) > 0.1) {
           changed.add(key);
         }
-        
+
         // Detect color change (crossing 50% threshold)
         const wasRed = previous >= 50;
         const isRed = current >= 50;
@@ -208,16 +208,17 @@ export const TokenRow = memo(function TokenRow({ token, isSelected }: TokenRowPr
       }
     });
 
-    if (changed.size > 0) {
-      setChangedBadges(changed);
-      // Clear the flash after animation (longer for color changes)
-      const timer = setTimeout(() => {
-        setChangedBadges(new Set());
-      }, colorChanged.size > 0 ? 1500 : 1000);
-      return () => clearTimeout(timer);
-    }
-
     prevPercentagesRef.current = { ...percentages };
+
+    if (changed.size === 0) return;
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- flash animation state is derived from `percentages` changes and must be set as soon as they're detected
+    setChangedBadges(changed);
+    // Clear the flash after animation (longer for color changes)
+    const timer = setTimeout(() => {
+      setChangedBadges(new Set());
+    }, colorChanged.size > 0 ? 1500 : 1000);
+    return () => clearTimeout(timer);
   }, [percentages]);
 
   return (
@@ -298,9 +299,13 @@ export const TokenRow = memo(function TokenRow({ token, isSelected }: TokenRowPr
                 <button
                   onClick={handleCopy}
                   className="p-2 min-w-[44px] min-h-[44px] -m-1.5 text-slate-400 hover:text-white transition-colors flex-shrink-0 flex items-center justify-center"
-                  aria-label={`Copy ${token.symbol} symbol`}
+                  aria-label={copied ? `Copied ${token.symbol} symbol` : `Copy ${token.symbol} symbol`}
                 >
-                  <Copy className="w-3.5 h-3.5" />
+                  {copied ? (
+                    <Check className="w-3.5 h-3.5 text-green-400" />
+                  ) : (
+                    <Copy className="w-3.5 h-3.5" />
+                  )}
                 </button>
               </div>
             </div>
