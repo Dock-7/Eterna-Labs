@@ -8,7 +8,6 @@ import { TokenTable } from '@/src/components/organisms/TokenTable';
 import { Topbar } from '@/src/components/layout/Topbar';
 import { BottomBar } from '@/src/components/layout/BottomBar';
 import { ErrorBoundary } from '@/src/components/ErrorBoundary';
-import Link from 'next/link';
 
 export default function Home() {
   return (
